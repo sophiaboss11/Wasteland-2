@@ -32261,7 +32261,7 @@ MonoBehaviour:
   - {fileID: 250249624}
   - {fileID: 1173813479}
   systemRenderer: {fileID: 1686366225}
-  keyCode: 0
+  keyCode: 49
   fireMouseButton: 0
   maxPower: 20
   minPower: 5
