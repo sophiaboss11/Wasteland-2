@@ -55,24 +55,38 @@ namespace Valve.VR.InteractionSystem
         private void Update()
         {
             Player player = Player.instance;
+            bool leftHandValid = false;
+            bool rightHandValid = false;
 
             if (canRotate && snapLeftAction != null && snapRightAction != null && snapLeftAction.activeBinding && snapRightAction.activeBinding)
             {
+                // Check if player is null
+                if (player == null)
+                {
+                    return;
+                }
+
                 //only allow snap turning after a quarter second after the last teleport
                 if (Time.time < (teleportLastActiveTime + canTurnEverySeconds))
                     return;
 
-                // only allow snap turning when not holding something
 
-                bool rightHandValid = player.rightHand.currentAttachedObject == null ||
-                    (player.rightHand.currentAttachedObject != null
-                    && player.rightHand.currentAttachedTeleportManager != null
-                    && player.rightHand.currentAttachedTeleportManager.teleportAllowed);
+                // only allow snap turning when not holding something and when hand is not null
+                if (player.rightHand != null)
+                {
+                    rightHandValid = player.rightHand.currentAttachedObject == null ||
+                        (player.rightHand.currentAttachedObject != null
+                        && player.rightHand.currentAttachedTeleportManager != null
+                        && player.rightHand.currentAttachedTeleportManager.teleportAllowed);
+                }
 
-                bool leftHandValid = player.leftHand.currentAttachedObject == null ||
-                    (player.leftHand.currentAttachedObject != null
-                    && player.leftHand.currentAttachedTeleportManager != null
-                    && player.leftHand.currentAttachedTeleportManager.teleportAllowed);
+                if (player.leftHand != null)
+                {
+                    leftHandValid = player.leftHand.currentAttachedObject == null ||
+                        (player.leftHand.currentAttachedObject != null
+                        && player.leftHand.currentAttachedTeleportManager != null
+                        && player.leftHand.currentAttachedTeleportManager.teleportAllowed);
+                }
 
 
                 bool leftHandTurnLeft = snapLeftAction.GetStateDown(SteamVR_Input_Sources.LeftHand) && leftHandValid;
