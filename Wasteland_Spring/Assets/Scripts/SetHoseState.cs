@@ -11,9 +11,19 @@ public class SetHoseState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        hoseState = player.GetComponent<HoseState>();
-        hoseState.SetHoseActive(active);
+        var Players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject playerObject in Players)
+        {
+            hoseState = playerObject.GetComponentInChildren<HoseState>();
+            if(hoseState != null)
+            {
+                hoseState.SetHoseActive(active);
+            }
+            
+        }
+//        player = GameObject.FindGameObjectWithTag("Player");
+//        hoseState = player.GetComponent<HoseState>();
+//        hoseState.SetHoseActive(active);
     }
 
     // Update is called once per frame
