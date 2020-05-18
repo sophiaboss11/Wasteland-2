@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892dbc91aeb16864f8077fedd30d2709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dissolveAmountIncrement: 0.01
+  materialProperty: RenderPerCent
+  materialPropertyIncrement: 0.01
+  smoothTime: 0.01
 --- !u!1 &7764405035190775975
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,9 +88,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  RandomTriggerDelay: 0.5
+  progressManager: {fileID: 0}
+  RandomTriggerDelay: 0
   TriggerEventThreshold: 1
   TriggerOnlyOnce: 0
+  TimesTriggeredToTriggerProgressManager: 60
 --- !u!1001 &2997533219512796153
 PrefabInstance:
   m_ObjectHideFlags: 0

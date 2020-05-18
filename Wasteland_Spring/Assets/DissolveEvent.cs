@@ -18,6 +18,7 @@ public class DissolveEvent : MonoBehaviour
     // How much the amount increments on trigger
     public float materialPropertyIncrement = 0.01f;
     public float smoothTime = 0.25f;
+    private float smoothVelocity = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -66,15 +67,16 @@ public class DissolveEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentMaterialPropertyAmount >= 0.0f && currentMaterialPropertyAmount < 1.0f)
-        {
-            float velocity = 0.0f;
-            // Smoothly interpolate between values
-            //            float matPropValue = Mathf.Lerp(currentMaterialPropertyAmount, 1.0f, 0.1f * Time.deltaTime);
+        //        if(currentMaterialPropertyAmount >= 0.0f && currentMaterialPropertyAmount < 1.0f)
+        //        {
+        // Smoothly interpolate between values
+        float matPropValue = Mathf.Lerp(lastMaterialPropertyAmount, currentMaterialPropertyAmount, 0.5f * Time.deltaTime);
 
-            float matPropValue = Mathf.SmoothDamp(currentMaterialPropertyAmount, 1.0f, ref velocity, smoothTime, Time.deltaTime);
-            lastMaterialPropertyAmount += velocity;
+        //            float matPropValue = Mathf.SmoothDamp(currentMaterialPropertyAmount, 1.0f, ref velocity, smoothTime, Time.deltaTime);
+//        float matPropValue = Mathf.SmoothDamp(lastMaterialPropertyAmount, currentMaterialPropertyAmount, ref smoothVelocity, smoothTime);
+//            lastMaterialPropertyAmount += velocity;
             SetMaterialProperty(matPropValue);
-        }
+//        }
+        lastMaterialPropertyAmount = matPropValue;
     }
 }
