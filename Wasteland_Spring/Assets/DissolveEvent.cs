@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Sets a float value in a shader
 [RequireComponent(typeof(MeshRenderer))]
 public class DissolveEvent : MonoBehaviour 
 {
     private MeshRenderer mesh;
     private Material dissolveMat;
-    private string materialProperty = "RenderPerCent";
-    private float dissolveAmount = 0.0f;
-    private float dissolveAmountIncrement = 0.1f;
+    // Shader string
+    public string materialProperty = "RenderPerCent";
+    // Current value
+    private float currentMaterialPropertyAmount= 0.0f;
+    // How much the amount increments on trigger
+    public float materialPropertyIncrement = 0.01f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,28 +30,35 @@ public class DissolveEvent : MonoBehaviour
         {
             Debug.LogError("Error: material assigned to mesh does not have required property" +  materialProperty);
         }
+
+        SetMaterialProperty(0.0f);
     }
 
     private void Reset()
     {
-        dissolveAmount = 0.0f;
+        currentMaterialPropertyAmount = 0.0f;
     }
 
-    public void IncrementDissolve()
+    public void IncrementMaterialProperty()
     {
         // Increment and clamp dissolveAmount
-        dissolveAmount += dissolveAmountIncrement;
-        ClampDissolve();
+        currentMaterialPropertyAmount+= materialPropertyIncrement;
+        ClampMaterialPropertyAmount();
 
         // Set the material property
-        dissolveMat.SetFloat(materialProperty, dissolveAmount);
+        SetMaterialProperty(currentMaterialPropertyAmount);
+    }
+
+    private void SetMaterialProperty(float newAmount)
+    {
+        dissolveMat.SetFloat(materialProperty, newAmount);
     }
 
     // Clamp the value of dissolveAmount to 0.0 <= x <= 1.0
-    private void ClampDissolve()
+    private void ClampMaterialPropertyAmount()
     {
-        dissolveAmount = (dissolveAmount > 1.0f) ? 1.0f : dissolveAmount;
-        dissolveAmount = (dissolveAmount < 0.0f) ? 0.0f : dissolveAmount;
+        currentMaterialPropertyAmount = (currentMaterialPropertyAmount > 1.0f) ? 1.0f : currentMaterialPropertyAmount;
+        currentMaterialPropertyAmount = (currentMaterialPropertyAmount < 0.0f) ? 0.0f : currentMaterialPropertyAmount;
     }
 
     // Update is called once per frame

@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -122,24 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &2111221 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6537130451590519536, guid: 2daf68a3456488e4089b6512dae79b6d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1897504746}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2111222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 892dbc91aeb16864f8077fedd30d2709, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &16032339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8003,54 +7985,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!1 &703134919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7764405035190775975, guid: 2daf68a3456488e4089b6512dae79b6d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1897504746}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &703134920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703134919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc59d0d2e26c3342b9b9b04c3822e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2111222}
-        m_MethodName: IncrementDissolve
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  RandomTriggerDelay: 0.5
-  TriggerEventThreshold: 1
-  TriggerOnlyOnce: 0
---- !u!135 &703134921
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 703134919}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 13
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &721360053
 GameObject:
   m_ObjectHideFlags: 0
@@ -26885,21 +26819,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 395897375165294862, guid: 2daf68a3456488e4089b6512dae79b6d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 9.6647
+    - target: {fileID: 703134920, guid: 2daf68a3456488e4089b6512dae79b6d, type: 3}
+      propertyPath: triggerEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncrementMaterialProperty
       objectReference: {fileID: 0}
-    - target: {fileID: 3105528007854944193, guid: 2daf68a3456488e4089b6512dae79b6d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f6c8e498a0af2b1488a8b653642b90a0, type: 2}
-    - target: {fileID: 4793056568954531372, guid: 2daf68a3456488e4089b6512dae79b6d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9093d3c44f183ea4a98ebdb6d578cdc4, type: 2}
+    - target: {fileID: 703134920, guid: 2daf68a3456488e4089b6512dae79b6d, type: 3}
+      propertyPath: RandomTriggerDelay
+      value: 1.24
+      objectReference: {fileID: 0}
     - target: {fileID: 6745245335231791796, guid: 2daf68a3456488e4089b6512dae79b6d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26908,7 +26835,7 @@ PrefabInstance:
     - target: {fileID: 6745245335231791796, guid: 2daf68a3456488e4089b6512dae79b6d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0140912e-16
+      value: -0.79
       objectReference: {fileID: 0}
     - target: {fileID: 6745245335231791796, guid: 2daf68a3456488e4089b6512dae79b6d,
         type: 3}
@@ -26959,11 +26886,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Act2_BulldozerMountains
-      objectReference: {fileID: 0}
-    - target: {fileID: 7846348460413937891, guid: 2daf68a3456488e4089b6512dae79b6d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 11.486384
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2daf68a3456488e4089b6512dae79b6d, type: 3}
