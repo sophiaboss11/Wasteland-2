@@ -115,7 +115,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - RenderPerCent: 0.3442224
+    - RenderPerCent: 1
     - Vector1_91E57CEF: 0.015
     - Vector1_B0B09372: 0
     - Vector1_CF0063A6: 45.3
