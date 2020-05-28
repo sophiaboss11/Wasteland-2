@@ -25,10 +25,7 @@ public class ccGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
-
-
     public void ProgressManagerFinished()
     {
         numOfManagersLeft++;
