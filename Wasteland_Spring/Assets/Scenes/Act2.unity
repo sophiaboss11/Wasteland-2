@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 9
+  m_Version: 10
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
@@ -1037,6 +1037,11 @@ MonoBehaviour:
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0.5
+  m_FlareSize: 2
+  m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
+  m_FlareFalloff: 4
+  m_SurfaceTexture: {fileID: 0}
+  m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 1.5e+11
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -1044,6 +1049,8 @@ MonoBehaviour:
   m_FilterSizeTraced: 16
   m_SunLightConeAngle: 0.5
   m_LightShadowRadius: 0.5
+  m_SemiTransparentShadow: 0
+  m_ColorShadow: 1
   m_EvsmExponent: 15
   m_EvsmLightLeakBias: 0
   m_EvsmVarianceBias: 0.00001
@@ -1074,6 +1081,8 @@ MonoBehaviour:
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
+  m_BarnDoorAngle: 90
+  m_BarnDoorLength: 0.05
   m_ShadowCascadeRatios:
   - 0.05
   - 0.2
@@ -1090,6 +1099,8 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+  m_AreaLightEmissiveMeshShadowCastingMode: 0
+  m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
 --- !u!1 &278968315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,6 +2550,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2866,6 +2878,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3318,6 +3331,26 @@ Transform:
   m_Father: {fileID: 754498458}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &732729007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3761285421695293739, guid: 85abeeeeada34e046bd510d3178e87c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1875448382}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &732729011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732729007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964c37b28ba914e8c91bd445ae7f7729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material:
+  - {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
 --- !u!1 &754498457
 GameObject:
   m_ObjectHideFlags: 0
@@ -3384,7 +3417,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
@@ -6128,6 +6161,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6436,6 +6470,11 @@ MonoBehaviour:
   m_UseScreenSpaceShadows: 0
   m_InteractsWithSky: 1
   m_AngularDiameter: 0.5
+  m_FlareSize: 2
+  m_FlareTint: {r: 1, g: 1, b: 1, a: 1}
+  m_FlareFalloff: 4
+  m_SurfaceTexture: {fileID: 0}
+  m_SurfaceTint: {r: 1, g: 1, b: 1, a: 1}
   m_Distance: 1.5e+11
   m_UseRayTracedShadows: 0
   m_NumRayTracingSamples: 4
@@ -6443,6 +6482,8 @@ MonoBehaviour:
   m_FilterSizeTraced: 16
   m_SunLightConeAngle: 0.5
   m_LightShadowRadius: 0.5
+  m_SemiTransparentShadow: 0
+  m_ColorShadow: 1
   m_EvsmExponent: 15
   m_EvsmLightLeakBias: 0
   m_EvsmVarianceBias: 0.00001
@@ -6473,6 +6514,8 @@ MonoBehaviour:
   m_NormalBias: 0.75
   m_SlopeBias: 0.5
   m_ShadowUpdateMode: 0
+  m_BarnDoorAngle: 90
+  m_BarnDoorLength: 0.05
   m_ShadowCascadeRatios:
   - 0.05
   - 0.2
@@ -6489,6 +6532,8 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
+  m_AreaLightEmissiveMeshShadowCastingMode: 0
+  m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
 --- !u!1001 &1480290821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6999,6 +7044,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7906,7 +7952,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: -4216859302048453862, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7986,17 +8032,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: -3255643355379017767, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: -2830830413213190409, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: -2433089979519545069, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8011,7 +8057,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: -927199367670048503, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Name
@@ -8021,7 +8067,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: 4545275093736804548, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8031,19 +8077,39 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: 5136601443142522399, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     - target: {fileID: 6072324095031682339, guid: 85abeeeeada34e046bd510d3178e87c7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 380c596760c321b45b6a005a8adb3ffa, type: 2}
+      objectReference: {fileID: 2100000, guid: 44d85938de96b4b4fa1d0c6fe8edea58, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85abeeeeada34e046bd510d3178e87c7, type: 3}
+--- !u!1 &1875448383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6859513622370522124, guid: 85abeeeeada34e046bd510d3178e87c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1875448382}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1875448384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875448383}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964c37b28ba914e8c91bd445ae7f7729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material:
+  - {fileID: 2100000, guid: c6d38711520119c4e89ddf1ea6adc007, type: 2}
 --- !u!1001 &1891812358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9215,6 +9281,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
