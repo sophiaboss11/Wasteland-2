@@ -4,8 +4,18 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class AnimationInstantiator : MonoBehaviour
 {
+    // Animation Instantiator
+    // This script looks for Animators in each child object in the hierarchy under it
+    // and sets triggers animation parameter triggers based on the animation it's playing.
+    // Look at the example scene in Scenes/AnimationInstantiator_Test for an example of usage.
+    // Jason Wang - 6/22/2020
+
+    #region === PUBLIC VARIABLES ===
+    // PUBLIC VARIABLES
+
     // Animatable properties
     [Header("Animatable Properties")]
     [Tooltip("If this is true during play mode, Update() will transition to the next state and reset this property")]
@@ -18,17 +28,8 @@ public class AnimationInstantiator : MonoBehaviour
     [Tooltip("Display debug messages in log")]
     public bool DebugLog = false;           
 
-    [Tooltip("Loop animation when finished")]
-    public bool Loop = false;               
-
-    [Tooltip("Begin playing as soon as play mode is entered")]
-    public bool PlayOnStart = false;        // Begin playing as soon as play mode is entered
-
     [Tooltip("Random delay before starting next animation state")]
     public bool UseAnimDelay = false;        
-
-    [Tooltip("Seed to feed random number generator")]
-    public int RandomSeed = 0;              
 
     [Tooltip("// Minimum time before starting next animation state if playing")]
     public float MinAnimDelay = 0.0f;       
@@ -42,13 +43,31 @@ public class AnimationInstantiator : MonoBehaviour
     [Tooltip("String name of reset trigger in animator controller ")]
     public string ResetTriggerName = "Reset";
 
-    private List<Animator> ChildAnimators;
+//      Not needed: Use animation controller state for loops
+//    [Tooltip("Loop animation when finished")]
+//    public bool Loop = false;               
 
-    // Start is called before the first frame update
+//      Not needed: Use the animation controller to 
+//    [Tooltip("Begin playing as soon as play mode is entered")]
+//    public bool PlayOnStart = false;        // Begin playing as soon as play mode is entered
+
+//      TODO: This is a problem since this is called once
+//    [Tooltip("Seed to feed random number generator")]
+//    public int RandomSeed = 0;              
+
+    #endregion
+
+    #region === PRIVATE VARIABLES ===
+    private List<Animator> ChildAnimators;
+    #endregion
+
+    #region === UNITY METHODS ===
+
     void Start()
     {
         ChildAnimators = new List<Animator>();
-        PlayNextState = PlayOnStart;
+        PlayNextState = false;
+        Reset = false;
         SetChildAnimators();
     }
 
@@ -57,6 +76,74 @@ public class AnimationInstantiator : MonoBehaviour
         ChildAnimators.Clear();
     }
 
+    private void Update()
+    {
+        DoStateTransitionsIfPlaying();
+    }
+
+    #endregion
+
+    #region === DELEGATES ===
+
+    // Delegates for UnityEvent triggers
+    public void PlayNextAnimationState()
+    {
+        if(DebugLog)
+        {
+            Debug.Log("Playing next animation state!");
+        }
+
+        foreach(Animator animator in ChildAnimators)
+        {
+            if(animator != null)
+            {
+                if(UseAnimDelay)
+                {
+                    AnimatorPlayNextStateAfterDelay(animator);
+                }
+                else
+                {
+                    AnimatorPlayNextStateImmediate(animator);
+                }
+            }
+        }
+    }
+
+    public void ResetAllAnimators()
+    {
+        if(DebugLog)
+        {
+            Debug.Log("Resetting all child animators!");
+        }
+
+        foreach(Animator animator in ChildAnimators)
+        {
+            if(animator != null)
+            {
+                AnimatorResetImmediate(animator);            
+            }
+        }
+    }
+
+    private void AnimatorPlayNextStateImmediate(Animator animator)
+    {
+        AnimatorSetTriggerParameter(animator, NextStateTriggerName);
+    }
+
+    private void AnimatorResetImmediate(Animator animator)
+    {
+        AnimatorSetTriggerParameter(animator, ResetTriggerName);
+    }
+
+    private void AnimatorPlayNextStateAfterDelay(Animator animator)
+    {
+        StartCoroutine("CoroutineDelayedPlayNextState", animator);
+    }
+
+    #endregion
+
+    #region === PRIVATE METHODS ===
+
     private void SetChildAnimators()
     {
         Animator[] animators = this.gameObject.GetComponentsInChildren<Animator>();
@@ -64,22 +151,15 @@ public class AnimationInstantiator : MonoBehaviour
         {
             Debug.LogWarning("No animators found in children.");
         }
+
         ChildAnimators.AddRange(animators);
-//        foreach(var animator in animators)
-//        {
-//            ChildAnimators.Add(animator);
-//        }
+
         if (ChildAnimators.Count <= 0)
         {
             Debug.LogWarning("No animators added to childAnimatorControllers!");
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        DoStateTransitionsIfPlaying();
-    }
 
     // Handles state transitions for animations
     private void DoStateTransitionsIfPlaying()
@@ -106,66 +186,26 @@ public class AnimationInstantiator : MonoBehaviour
         }
     }
 
-    // Delegates for UnityEvent triggers
-    public void PlayNextAnimationState()
+    // Returns random delay in range
+    private float AnimationRandomDelay()
     {
-        foreach(Animator animator in ChildAnimators)
-//        ChildAnimators.ForEach(delegate (Animator animator)
-        {
-            if(animator != null)
-            {
-                if(UseAnimDelay)
-                {
-                    AnimatorPlayNextStateAfterDelay(animator);
-                }
-                else
-                {
-                    AnimatorPlayNextStateImmediate(animator);
-                }
-            }
-        }
+//        int baseTime = (int) (Time.realtimeSinceStartup * 100.0);
+//        UnityEngine.Random.InitState(baseTime + RandomSeed);
+        return UnityEngine.Random.Range(MinAnimDelay, MaxAnimDelay);
     }
+
     private void AnimatorSetTriggerParameter(Animator animator, string triggerName)
     {
         animator.SetTrigger(triggerName);
     }
 
-    private void AnimatorPlayNextStateImmediate(Animator animator)
-    {
-        AnimatorSetTriggerParameter(animator, NextStateTriggerName);
-    }
-    private void AnimatorResetImmediate(Animator animator)
-    {
-        AnimatorSetTriggerParameter(animator, ResetTriggerName);
-    }
+    #endregion
 
-    private void AnimatorPlayNextStateAfterDelay(Animator animator)
-    {
-        StartCoroutine("CoroutineDelayedPlayNextState", animator);
-    }
-    public void ResetAllAnimators()
-    {
-        foreach(Animator animator in ChildAnimators)
-//        ChildAnimators.ForEach(delegate (Animator animator)
-        {
-            if(animator != null)
-            {
-                AnimatorResetImmediate(animator);            
-            }
-        }
-    }
-    
-    // Returns random delay in range
-    private float AnimationRandomDelay()
-    {
-        int baseTime = (int) (Time.realtimeSinceStartup * 100.0);
-//        UnityEngine.Random.InitState(baseTime + RandomSeed);
-        return UnityEngine.Random.Range(MinAnimDelay, MaxAnimDelay);
-    }
-
+    #region === COROUTINES ===
     IEnumerator CoroutineDelayedPlayNextState(Animator animator)
     {
         yield return new WaitForSeconds(AnimationRandomDelay());
         AnimatorPlayNextStateImmediate(animator);
     }
+    #endregion
 }
