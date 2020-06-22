@@ -133,6 +133,7 @@ public class AnimationInstantiator : MonoBehaviour
     private void AnimatorResetImmediate(Animator animator)
     {
         AnimatorSetTriggerParameter(animator, ResetTriggerName);
+        AnimatorResetTriggerParameter(animator, NextStateTriggerName);
     }
 
     private void AnimatorPlayNextStateAfterDelay(Animator animator)
@@ -197,6 +198,10 @@ public class AnimationInstantiator : MonoBehaviour
     private void AnimatorSetTriggerParameter(Animator animator, string triggerName)
     {
         animator.SetTrigger(triggerName);
+    }
+    private void AnimatorResetTriggerParameter(Animator animator, string triggerName)
+    {
+        animator.ResetTrigger(triggerName);
     }
 
     #endregion
